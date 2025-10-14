@@ -31,19 +31,38 @@
 
 
 
-            <div v-if="showlesson">
-            <div class="subject">
-                <img :src="lesson.imagepath" :alt="lesson.altimagetext">
-                <h2> Subject: {{lesson.subject}}  </h2>
-                <h2> Location: {{lesson.location}} </h2>
-                <h2> Price: £{{lesson.price}} </h2>
-                <h2> Spaces: {{lesson.space}} </h2>
-                <button class="addButton" @click="addlesson" v-if="cartempty">Add to cart</button>
-                <button class="addButton" disabled='disabled' v-else> Add to cart </button>
-            </div>
+            <div v-if="showlesson" class="shop">
 
-                <h1> {{cart}} </h1>
+                <div class="lesson-layout">
+                    <div class="lesson-list" v-for="lesson in lessons" :key="lesson.id">
+                        <div class="subject">
+
+                            <div class="info">
+                                <h2> Subject: {{lesson.subject}}  </h2>
+                                <h2> Location: {{lesson.location}} </h2>
+                                <h2> Price: £{{lesson.price}} </h2>
+                                <h2> Spaces: {{lesson.space}} </h2>
+
+                                <button class="addButton" @click="addlesson(lesson)" v-if="lesson.space > 0" >Add to cart</button>
+
+                                <button class="addButton" disabled v-else> Add to cart </button>
+
+                            </div>
+                            
+                            <img :src="lesson.imagepath" :alt="lesson.altimagetext">
+
+                        </div>
+
+                    
+                    </div>
+                </div>
+            
             </div>
+            
+
+
+
+
 
             <div v-else>
                 <h1>test</h1>

@@ -39,20 +39,48 @@ h1 {
     text-align: center;
 }
 
-.lesson img{
-    width: 160px;
-    height: 140px;
-}
-
 .addButton{
     width: 120px;
     height: 25px;
     font-size: 18px;
+
 }
+
+.addButton:hover {
+    background-color: lightgray;
+}
+
+
+.subject img{
+    width: 160px;
+    height: 140px;
+}
+
+.addcart:hover {
+    background-color: lightgray;
+}
+
+
+
 
 .subject {
     font-size: 12px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px; 
+    text-align: left;
     display: flex;
-    align-items: center;
-    justify-content: center
+    align-items: center;         /* Center the button horizontally */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.lesson-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+
