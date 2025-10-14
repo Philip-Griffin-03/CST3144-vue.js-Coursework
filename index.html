@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script defer src="front-end-vue.js"></script>
+<link rel="stylesheet" href="index.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>After School App</title>
+    
+    
+</head>
+
+
+
+<body>
+
+    <div id="app"> 
+        
+        <header>
+            <h1>{{title}}</h1>
+        </header>
+                       
+
+
+        <div class="product">
+
+            <button class="addcart" @click="showcheckout"> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
+
+
+
+
+            <div v-if="showproduct">
+
+                
+                <img class="foodimage" :src="product.imagepath" :alt="product.altimagetext">
+                
+                <h2> {{product.title}} </h2>
+                <h2> {{product.desc}} </h2>
+                <h2 v-html="product.subject"></h2><!--use v-html when html tags need to be used-->
+                <h2> Price: £{{product.price}} </h2>
+                <button class="addButton" @click="addproduct" v-if="cartempty">Add to cart</button>
+
+                <button class="addButton" disabled='disabled' v-else> Add to cart </button>
+
+                <h1> {{cart}} </h1>
+            </div>
+
+            <div v-else>
+                <h1>test</h1>
+                <button @click="showcheckout"> Back to shop</button>
+                <h2> price: £{{pricetotal}} </h2>
+            </div>
+
+            
+
+
+        </div>
+
+        <footer>
+            <p>After School App</p>
+        </footer>
+
+
+
+
+    </div>
+
+
+</body>
+
+</html>

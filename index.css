@@ -1,0 +1,54 @@
+footer {
+        position: fixed;
+        padding: 25px;
+        background-color: rgb(160,160,160);
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        
+    }
+
+    header {
+        position:static;
+        padding: 25px;
+        background-color: rgb(160,160,160);
+    }
+
+    .foodimage {
+        position: relative;
+    }
+
+    .addcart {
+        position: relative;
+        left: 800px;
+        bottom: 85px;
+        font-size: 18px;
+    }
+
+
+    body {
+        font-family: 'Courier New', monospace;
+        background-color: lightgray;
+        margin: 0;
+        padding: 0;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+
+    .product{
+        text-align: center;
+    }
+
+    .product img{
+        width: 160px;
+        height: 140px;
+    }
+
+    .addButton{
+        width: 120px;
+        height: 25px;
+        font-size: 18px;
+    }
