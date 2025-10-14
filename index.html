@@ -42,7 +42,7 @@
 
                                 <button class="addButton" @click="addlesson(lesson)" v-if="lesson.space > 0" >Add to cart</button>
 
-                                <button class="addButton" disabled v-else> Add to cart </button>
+                                <button class="addButton" disabled v-else> Sold Out </button>
 
                             </div>
                             
@@ -62,10 +62,39 @@
 
 
             <div v-else>
-                <h1>test</h1>
+
+                 <div class="lesson-layout">
+                    <div class="lesson-list" >
+                        <div class="subject" v-for="lesson in cart" :key="lesson.id">
+
+                            <div class="info">
+                                <h2> Subject: {{lesson.subject}}  </h2>
+                                <h2> Location: {{lesson.location}} </h2>
+                                <h2> Price: £{{lesson.price}} </h2>
+                                <h2> Spaces: {{lesson.quantity}} </h2> <!-- make this a counter that will add however many per same lesson-->
+
+                                <!-- change these buttons to a remove one
+                                <button class="addButton" @click="addlesson(lesson)" v-if="lesson.space > 0" >Add to cart</button>
+                                <button class="addButton" disabled v-else> Add to cart </button>-->
+
+                                <button class="addButton" @click="removelesson(lesson)">Remove</button>
+
+                            </div>
+                            
+                            <img :src="lesson.imagepath" :alt="lesson.altimagetext">
+
+                        </div>
+
+                    
+                    </div>
+                </div>
                 <button @click="showcheckout"> Back to shop</button>
                 <h2> price: £{{pricetotal}} </h2>
-                <h2>{{cart[0].subject}}</h2>  <!--This is used to seperate the first lesson in cart and select the individual attribute-->
+                
+
+                
+
+
 
             </div>
 

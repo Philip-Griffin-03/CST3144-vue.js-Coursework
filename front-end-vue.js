@@ -103,14 +103,34 @@ const app = Vue.createApp({
         },
         methods: {
             addlesson(lesson) {
-                if (lesson.space > 0) {
-                    this.cart.push(lesson);
-                    lesson.space = lesson.space - 1;
+
+                const existing = this.cart.find(item => item.id === lesson.id);
+
+                if (existing) {
+                    existing.quantity++;
                 }
+                else {
+                    this.cart.push({...lesson, quantity: 1});
+                }
+
+                lesson.space--;
             },
 
             showcheckout() {
                 this.showlesson = !this.showlesson;
+            },
+
+            removelesson(lesson) {
+                const existing = this.cart.find(item => item.id === lesson.id);
+
+                if(existing) {
+                    existing.quantity--;
+                    this.lessons.find(item => item.id === lesson.id).space++;
+                    
+                    if(existing.quantity <= 0) {
+                        this.cart = this.cart.filter(item => item.id !== lesson.id);
+                    }
+                }
             }
 
 
@@ -122,7 +142,7 @@ const app = Vue.createApp({
             },
 
             pricetotal() {
-                return this.cart.reduce((total, lesson) => total + lesson.price, 0);
+            return this.cart.reduce((total, lesson) => total + lesson.price * lesson.quantity, 0);
             }
         }
     })
