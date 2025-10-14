@@ -28,9 +28,6 @@
 
             <button class="addcart" @click="showcheckout"> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
 
-
-
-
             <div v-if="showlesson" class="shop">
 
                 <div class="lesson-layout">
@@ -68,6 +65,8 @@
                 <h1>test</h1>
                 <button @click="showcheckout"> Back to shop</button>
                 <h2> price: £{{pricetotal}} </h2>
+                <h2>{{cart[0].subject}}</h2>  <!--This is used to seperate the first lesson in cart and select the individual attribute-->
+
             </div>
 
             

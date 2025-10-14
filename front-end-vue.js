@@ -14,7 +14,7 @@ const app = Vue.createApp({
                     altimagetext: "Maths Icon",
                 },
                 {
-                    id:1001,
+                    id:1002,
                     subject: "Maths",
                     location: "Manchester",
                     price: 10,
@@ -23,7 +23,7 @@ const app = Vue.createApp({
                     altimagetext: "Maths Icon",
                 },
                 {
-                    id:1001,
+                    id:1003,
                     subject: "English",
                     location: "London",
                     price: 30,
@@ -32,7 +32,7 @@ const app = Vue.createApp({
                     altimagetext: "English Icon",
                 },
                 {
-                    id:1001,
+                    id:1004,
                     subject: "English",
                     location: "Bristol",
                     price: 20,
@@ -41,7 +41,7 @@ const app = Vue.createApp({
                     altimagetext: "English Icon",
                 },
                 {
-                    id:1001,
+                    id:1005,
                     subject: "Science",
                     location: "London",
                     price: 30,
@@ -50,16 +50,16 @@ const app = Vue.createApp({
                     altimagetext: "Science Icon",
                 },
                 {
-                    id:1001,
+                    id:1006,
                     subject: "Science",
                     location: "Manchester",
-                    price: 120,
+                    price: 20,
                     space: 5,
                     imagepath: "images/science.png",
                     altimagetext: "Science Icon",
                 },
                 {
-                    id:1001,
+                    id:1007,
                     subject: "Music",
                     location: "London",
                     price: 50,
@@ -68,7 +68,7 @@ const app = Vue.createApp({
                     altimagetext: "Music Icon",
                 },
                 {
-                    id:1001,
+                    id:1008,
                     subject: "Music",
                     location: "Bristol",
                     price: 40,
@@ -77,7 +77,7 @@ const app = Vue.createApp({
                     altimagetext: "Music Icon",
                 },
                 {
-                    id:1001,
+                    id:1009,
                     subject: "Art",
                     location: "London",
                     price: 40,
@@ -86,7 +86,7 @@ const app = Vue.createApp({
                     altimagetext: "Art Icon",
                 },
                 {
-                    id:1001,
+                    id:1010,
                     subject: "Art",
                     location: "Manchester",
                     price: 30,
@@ -104,8 +104,8 @@ const app = Vue.createApp({
         methods: {
             addlesson(lesson) {
                 if (lesson.space > 0) {
-                    this.cart.push(lesson.id);
-                    this.lesson.space = this.lesson.space - 1;
+                    this.cart.push(lesson);
+                    lesson.space = lesson.space - 1;
                 }
             },
 
@@ -121,12 +121,8 @@ const app = Vue.createApp({
                 return this.cart.length || "";
             },
 
-            spaceempty() {
-                return this.lesson.space != 0;
-            },
-
             pricetotal() {
-                return this.cart.length * this.lesson.price || 0;
+                return this.cart.reduce((total, lesson) => total + lesson.price, 0);
             }
         }
     })
