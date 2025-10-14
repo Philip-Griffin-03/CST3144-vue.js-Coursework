@@ -26,7 +26,10 @@
 
         <div class="lesson">
 
-            <button class="addcart" @click="showcheckout"> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
+            
+            <button class="addcart" @click="showcheckout" v-if="cartitemcount == 0" disabled> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
+            <button class="addcart" @click="showcheckout" v-else> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
+
 
             <div v-if="showlesson" class="shop">
 

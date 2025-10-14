@@ -105,7 +105,7 @@ const app = Vue.createApp({
             addlesson(lesson) {
 
                 const existing = this.cart.find(item => item.id === lesson.id);
-
+                            
                 if (existing) {
                     existing.quantity++;
                 }
