@@ -1,3 +1,4 @@
+
 footer {
     position: fixed;
     padding: 25px;
@@ -6,12 +7,12 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-        
 }
 
 header {
     position:static;
     padding: 25px;
+    width: 100%;
     background-color: rgb(160,160,160);
 }
 
@@ -27,8 +28,8 @@ header {
 body {
     font-family: 'Courier New', monospace;
     background-color: lightgray;
-    margin: 0;
-    padding: 0;
+
+    padding-bottom: 100px;
 }
 
 h1 {
