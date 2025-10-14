@@ -24,25 +24,23 @@
                        
 
 
-        <div class="product">
+        <div class="lesson">
 
             <button class="addcart" @click="showcheckout"> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
 
 
 
 
-            <div v-if="showproduct">
-
-                
-                <img class="foodimage" :src="product.imagepath" :alt="product.altimagetext">
-                
-                <h2> {{product.title}} </h2>
-                <h2> {{product.desc}} </h2>
-                <h2 v-html="product.subject"></h2><!--use v-html when html tags need to be used-->
-                <h2> Price: £{{product.price}} </h2>
-                <button class="addButton" @click="addproduct" v-if="cartempty">Add to cart</button>
-
+            <div v-if="showlesson">
+            <div class="subject">
+                <img :src="lesson.imagepath" :alt="lesson.altimagetext">
+                <h2> Subject: {{lesson.subject}}  </h2>
+                <h2> Location: {{lesson.location}} </h2>
+                <h2> Price: £{{lesson.price}} </h2>
+                <h2> Spaces: {{lesson.space}} </h2>
+                <button class="addButton" @click="addlesson" v-if="cartempty">Add to cart</button>
                 <button class="addButton" disabled='disabled' v-else> Add to cart </button>
+            </div>
 
                 <h1> {{cart}} </h1>
             </div>

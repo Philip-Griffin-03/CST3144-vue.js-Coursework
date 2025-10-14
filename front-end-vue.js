@@ -3,8 +3,9 @@ const app = Vue.createApp({
         data(){
             return {
                 title: "After School App",
-                showproduct: true,
-                product: {
+                showlesson: true,
+                lesson: {
+                    subject: "Maths",
                     id:1001,
                     topic: "Maths",
                     location: "London",
@@ -18,12 +19,12 @@ const app = Vue.createApp({
             }
         },
         methods: {
-            addproduct() {
-                this.cart.push(this.product.id);
+            addlesson() {
+                this.cart.push(this.lesson.id);
             },
 
             showcheckout() {
-                this.showproduct = this.showproduct ? false:true;
+                this.showlesson = this.showlesson ? false:true;
             }
 
 
@@ -35,11 +36,11 @@ const app = Vue.createApp({
             },
 
             cartempty() {
-                return this.product.stock > this.cartitemcount;
+                return this.lesson.space > this.cartitemcount;
             },
 
             pricetotal() {
-                return this.cart.length * this.product.price || 0;
+                return this.cart.length * this.lesson.price || 0;
             }
         }
     })
