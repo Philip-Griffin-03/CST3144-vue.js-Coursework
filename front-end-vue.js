@@ -120,7 +120,6 @@ const app = Vue.createApp({
                 }
 
                 lesson.space--;
-                this.sort();
             },
 
             showcheckout() {//changes boolean value of showlesson to change the page from the shop page to the checkout page

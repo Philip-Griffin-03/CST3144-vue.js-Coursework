@@ -37,7 +37,7 @@ header {
 
 
 body {
-    font-family: 'Courier New', monospace;
+    font-family: 'Ariel Bold', monospace;
     background-image: url('images/chalk.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -61,6 +61,7 @@ h1 {
     width: 120px;
     height: 25px;
     font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 2);
 
 }
 
@@ -87,7 +88,7 @@ h1 {
     text-align: left;
     display: flex;
     align-items: center;         /* Center the button horizontally */
-    background-color: #fff;
+    background-image:  url('images/paper.png');
     box-shadow: 0 2px 5px rgba(0, 0, 0, 10);
 }
 
