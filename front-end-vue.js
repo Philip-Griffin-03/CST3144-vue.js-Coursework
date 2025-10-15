@@ -99,13 +99,15 @@ const app = Vue.createApp({
             ],
                 cart: [],
                 username: "",
-                userphone: ""
+                userphone: "",
+                picked: "Subject"
                 
             }
         },
         methods: {
             addlesson(lesson) {//adds the lesson added by the user, pushes it onto their cart with quantity of 1 if the lesson isnt already added or quantity added to the current lesson in their cart
 
+                console.log(this.picked);//delete after, used to see which sort is picked
                 const existing = this.cart.find(item => item.id === lesson.id);//checks if selected lesson is in cart
                             
                 if (existing) {//if same lesson with same id is already in cart then only the quantity of that lesson will be increased
@@ -116,6 +118,7 @@ const app = Vue.createApp({
                 }
 
                 lesson.space--;
+                this.sort();
             },
 
             showcheckout() {//changes boolean value of showlesson to change the page from the shop page to the checkout page
@@ -137,6 +140,10 @@ const app = Vue.createApp({
             },
             checkout() {
                 //placeholder for function to push order onto database
+                alert("Order Confirmed " + this.username);
+                this.username = "";
+                this.userphone = "";
+                this.cart = [];
             }
 
 
@@ -152,10 +159,22 @@ const app = Vue.createApp({
             },
 
             infocheck() {//this checks if the name only had letters and the phone number only has numbers entered by the user
-                if ((this.username.trim() == "" || (/[^a-zA-Z]/.test(this.username.trim()))) || this.userphone.trim() == "" || (/[^0-9]/.test(this.userphone.trim()))){
+                if ((this.username.trim() == "" || (/[^a-zA-Z]/.test(this.username.trim()))) || this.userphone.trim() == "" || (/[^0-9]/.test(this.userphone.trim()))){// add this to have phone number length minimum|| this.userphone.trim().length <= 9
                     return true; 
                 }  
+            },
+
+            sort() {//uses this.picked to change which sort is used, the picked is used to order the cart according to picked selected
+                if (this.picked == "Subject" || this.picked == "Location") {
+                    this.cart.subject.sort();
+                }
+                else if (this.picked == "Price" || this.picked == "Space") {
+                    this.cart.price.sort(function(a, b){return a-b});
+                }
+                return true;
             }
+
+
         }
     })
 

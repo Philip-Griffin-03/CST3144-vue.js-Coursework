@@ -23,8 +23,24 @@
             <div class="CheckoutInfo" v-if="!showlesson">
                 <input v-model="username" placeholder="Name:" class="username"/>
                 <input v-model="userphone" placeholder="Phone Number:" class="userphone"/>
-                <button v-if="infocheck" disabled>Enter Info properly</button>
+                <button v-if="infocheck" disabled>Check Out - Enter Info properly</button>
                 <button @click="checkout" v-else>Check Out</button>
+            </div>
+
+            <div class="Sortfunction" v-else>
+                <p>Sort By:</p>
+
+                <input type="radio" id="Subject" value="Subject" v-model="picked" />
+                <label for="Subject">Subject</label>
+
+                <input type="radio" id="Location" value="Location" v-model="picked" />
+                <label for="Location">Location</label>
+
+                <input type="radio" id="Price" value="Price" v-model="picked" />
+                <label for="Price">Price</label>
+
+                <input type="radio" id="Space" value="Space" v-model="picked" />
+                <label for="Space">Space</label>
             </div>
 
             <h1>{{title}}</h1>
@@ -41,6 +57,7 @@
 
             <div v-if="showlesson" class="shop">
 
+                
                 <div class="lesson-layout">
                     <div class="lesson-list" >
                         <div class="subject" v-for="lesson in lessons" :key="lesson.id">
