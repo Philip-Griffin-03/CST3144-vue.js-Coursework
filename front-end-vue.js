@@ -100,7 +100,9 @@ const app = Vue.createApp({
                 cart: [],
                 username: "",
                 userphone: "",
-                picked: "Subject"
+                picked: "Subject",
+                sortDesc: false,
+                search: ""
                 
             }
         },
@@ -165,13 +167,46 @@ const app = Vue.createApp({
             },
 
             sort() {//uses this.picked to change which sort is used, the picked is used to order the cart according to picked selected
-                if (this.picked == "Subject" || this.picked == "Location") {
-                    this.cart.subject.sort();
+
+                let sorted = [...this.lessons];
+
+                if (this.search.trim() !== "") {
+                    const query = this.search.toLowerCase();
+
+                    sorted = sorted.filter(lesson => {
+                        return (
+                            lesson.subject.toLowerCase().includes(query) ||
+                            lesson.location.toLowerCase().includes(query) ||
+                            lesson.price.toString().includes(query) ||
+                            lesson.space.toString().includes(query)
+                        );
+                    });
                 }
-                else if (this.picked == "Price" || this.picked == "Space") {
-                    this.cart.price.sort(function(a, b){return a-b});
+
+
+
+                switch(this.picked) {//uses switch to check sort feature selected and sorts array of lessons via which attribute is selected
+                    
+                    case "Subject":
+                        sorted.sort((a,b) => a.subject.localeCompare(b.subject));
+                        break;
+                    case "Location":
+                        sorted.sort((a,b) => a.location.localeCompare(b.location));
+                        break;
+                    case "Price":
+                        sorted.sort((a,b) => a.price - b.price);
+                        break;
+                    case "Space":
+                        sorted.sort((a,b) => a.space - b.space);
+                        break;
                 }
-                return true;
+
+                if (this.sortDesc) sorted.reverse();
+
+                return sorted;
+
+
+                
             }
 
 
