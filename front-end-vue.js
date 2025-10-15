@@ -97,7 +97,9 @@ const app = Vue.createApp({
             
             
             ],
-                cart: []
+                cart: [],
+                username: "",
+                userphone: ""
                 
             }
         },
@@ -143,6 +145,15 @@ const app = Vue.createApp({
 
             pricetotal() {
             return this.cart.reduce((total, lesson) => total + lesson.price * lesson.quantity, 0);
+            },
+
+            infocheck() {
+                if (this.username.trim() == "" || this.userphone.trim() == ""){
+                    return true;
+                }
+                
+                
+                
             }
         }
     })

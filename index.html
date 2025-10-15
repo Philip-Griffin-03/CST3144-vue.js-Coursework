@@ -19,6 +19,14 @@
     <div id="app"> 
         
         <header>
+            
+            <div class="CheckoutInfo" v-if="!showlesson">
+                <input v-model="username" placeholder="Name:" class="username"/>
+                <input v-model="userphone" placeholder="Phone Number:" class="userphone"/>
+                <button v-if="infocheck" disabled>Enter Info properly</button>
+                <button @click="checkout" v-else>Check Out</button>
+            </div>
+
             <h1>{{title}}</h1>
         </header>
                        
@@ -27,8 +35,8 @@
         <div class="lesson">
 
             
-            <button class="addcart" @click="showcheckout" v-if="cartitemcount == 0" disabled> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
-            <button class="addcart" @click="showcheckout" v-else> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Checkout {{cartitemcount}} </button>
+            <button class="addcart" @click="showcheckout" v-if="cartitemcount == 0" disabled> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Cart {{cartitemcount}} </button>
+            <button class="addcart" @click="showcheckout" v-else> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Cart {{cartitemcount}} </button>
 
 
             <div v-if="showlesson" class="shop">
@@ -65,6 +73,7 @@
 
 
             <div v-else>
+
 
                  <div class="lesson-layout">
                     <div class="lesson-list" >
