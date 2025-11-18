@@ -19,7 +19,8 @@ const app = Vue.createApp({
                 userphone: "",
                 picked: "Subject",
                 sortDesc: false,
-                search: ""
+                search: "",
+                isCheckingOut: false
                 
             }
         },
@@ -82,64 +83,20 @@ const app = Vue.createApp({
                     }
                 }
             },
-            /*
-            async checkout() {
-                //placeholder for function to push order onto database/ only thing to have database pushed onto into table of checkouts
-
-                const order = {
-                    username: this.username,
-                    userphone: this.userphone,
-                    cart: this.cart,
-                    total: this.pricetotal
-                };
-
-                fetch(this.apibase + "checkout", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(order)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log("Order Saved:", data);
-
-                    if (!orderRes.ok) throw new Error("Checkout failed");
-
-                    const updatePromises = this.cart.map(item => {
-                        return fetch(this.apibase + "lessons/" + item.id, {
-                            method: "PUT",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ quantity: item.quantity })
-                        })
-                        .catch(err => {
-                            console.error("Update failed for lesson", item.id, err);
-                        });
-                    });
-
-
-
-                    await Promise.all(updatePromises);
-
-
-
-                    alert("Order Confirmed " + this.username);
-                    
-                    this.username = "";
-                    this.userphone = "";
-                    this.cart = [];
-                        
-                    
-                })
-                .catch(err => {
-                    console.error("Error sending order:", err);
-                    alert("Failed to complete checkout")
-                })
-
-
-            }*/
 
             async checkout() {
+
+
+                if (this.isCheckingOut) {
+                    console.log("Check in progress, ignore extra clicks");
+                    return;
+                }
+
+                this.isCheckingOut = true;
+                console.log("checkout started");
+
+
                 try {
-                // 1️⃣ Build the order object
                     const order = {
                         username: this.username,
                         userphone: this.userphone,
@@ -147,7 +104,6 @@ const app = Vue.createApp({
                         total: this.pricetotal
                     };
 
-                    // 2️⃣ Send order to backend
                     const orderRes = await fetch(this.apibase + "checkout", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -161,7 +117,6 @@ const app = Vue.createApp({
                     const data = await orderRes.json();
                     console.log("Order Saved:", data);
 
-                    // 3️⃣ Build PUT requests to update each lesson's space
                     const updatePromises = this.cart.map(item => {
                         return fetch(this.apibase + "lessons/" + item.id, {
                             method: "PUT",
@@ -172,10 +127,8 @@ const app = Vue.createApp({
                         });
                 });
 
-                // 4️⃣ Wait for all updates to finish
                 await Promise.all(updatePromises);
 
-                // 5️⃣ Confirm & reset
                 alert("Order Confirmed " + this.username);
 
                 this.username = "";
@@ -185,7 +138,12 @@ const app = Vue.createApp({
             } catch (err) {
                 console.error("Error during checkout:", err);
                 alert("Failed to complete checkout");
-            }}
+            } finally {
+                this.isCheckingOut = false;
+                console.log("Checkout Complete")
+            }
+        
+        }
 
 
 
