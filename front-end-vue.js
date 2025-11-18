@@ -24,12 +24,12 @@ const app = Vue.createApp({
             }
         },
 
-
+//s
 
         created() {
             console.log("Backend api:", this.apibase);
 
-            fetch(this.apibase + "lessons")
+            fetch(this.apibase + "Lessons")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok: " + response.status);
