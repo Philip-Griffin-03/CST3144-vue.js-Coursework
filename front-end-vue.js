@@ -1,6 +1,6 @@
 
 
-const api_base = "http://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com/"
+const api_base = "http://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com/";
 
 
 const app = Vue.createApp({
