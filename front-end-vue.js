@@ -95,6 +95,7 @@ const app = Vue.createApp({
                 fetch(this.apibase + "checkout", {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(order)
                 })
                 .then(res => res.json())
                 .then(data => {
