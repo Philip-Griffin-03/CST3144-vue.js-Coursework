@@ -84,7 +84,6 @@ const app = Vue.createApp({
             },
             checkout() {
                 //placeholder for function to push order onto database/ only thing to have database pushed onto into table of checkouts
-                alert("Order Confirmed " + this.username);
 
                 const order = {
                     username: this.username,
@@ -93,7 +92,7 @@ const app = Vue.createApp({
                     total: this.pricetotal
                 };
 
-                fetch(this.apibase + "checkout", {
+                fetch(this.api_base + "checkout", {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                 })
