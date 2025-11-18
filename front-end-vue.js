@@ -1,6 +1,6 @@
 
 
-const api_base = "https://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com/";
+const api_base = "http://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com/";
 
 
 const app = Vue.createApp({
@@ -29,7 +29,7 @@ const app = Vue.createApp({
         created() {
             console.log("Backend api:", this.apibase);
 
-            fetch(this.apibase + "Lessons")
+            fetch(this.apibase + "lessons")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok: " + response.status);
@@ -85,9 +85,35 @@ const app = Vue.createApp({
             checkout() {
                 //placeholder for function to push order onto database/ only thing to have database pushed onto into table of checkouts
                 alert("Order Confirmed " + this.username);
-                this.username = "";
-                this.userphone = "";
-                this.cart = [];
+
+                const order = {
+                    username: this.username,
+                    userphone: this.userphone,
+                    cart: this.cart,
+                    total: this.pricetotal
+                };
+
+                fetch(this.apibase + "checkout", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Order Saved:", data);
+                    alert("Order Confirmed");
+                    
+                    this.username = "";
+                    this.userphone = "";
+                    this.cart = [];
+                        
+                    
+                })
+                .catch(err => {
+                    console.error("Error sending order:", err);
+                    alert("Failed to complete checkout")
+                })
+
+
             }
 
 
