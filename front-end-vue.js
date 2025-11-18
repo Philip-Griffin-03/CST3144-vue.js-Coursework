@@ -1,102 +1,19 @@
 
+
+const api_base = "http://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com/"
+
+
 const app = Vue.createApp({
         data(){
             return {
+
+                apibase: api_base,
+
                 title: "After School App",
                 showlesson: true,
-                lessons: [{//temp data, this will be an array fetched from the database
-                    id:1001,
-                    subject: "Maths",
-                    location: "London",
-                    price: 20,
-                    space: 5,
-                    imagepath: "images/maths.png",
-                    altimagetext: "Maths Icon",
-                },
-                {
-                    id:1002,
-                    subject: "Maths",
-                    location: "Manchester",
-                    price: 10,
-                    space: 5,
-                    imagepath: "images/maths.png",
-                    altimagetext: "Maths Icon",
-                },
-                {
-                    id:1003,
-                    subject: "English",
-                    location: "London",
-                    price: 30,
-                    space: 5,
-                    imagepath: "images/english.png",
-                    altimagetext: "English Icon",
-                },
-                {
-                    id:1004,
-                    subject: "English",
-                    location: "Bristol",
-                    price: 20,
-                    space: 5,
-                    imagepath: "images/english.png",
-                    altimagetext: "English Icon",
-                },
-                {
-                    id:1005,
-                    subject: "Science",
-                    location: "London",
-                    price: 30,
-                    space: 5,
-                    imagepath: "images/science.png",
-                    altimagetext: "Science Icon",
-                },
-                {
-                    id:1006,
-                    subject: "Science",
-                    location: "Manchester",
-                    price: 20,
-                    space: 5,
-                    imagepath: "images/science.png",
-                    altimagetext: "Science Icon",
-                },
-                {
-                    id:1007,
-                    subject: "Music",
-                    location: "London",
-                    price: 50,
-                    space: 5,
-                    imagepath: "images/music.png",
-                    altimagetext: "Music Icon",
-                },
-                {
-                    id:1008,
-                    subject: "Music",
-                    location: "Bristol",
-                    price: 40,
-                    space: 5,
-                    imagepath: "images/music.png",
-                    altimagetext: "Music Icon",
-                },
-                {
-                    id:1009,
-                    subject: "Art",
-                    location: "London",
-                    price: 40,
-                    space: 5,
-                    imagepath: "images/art.png",
-                    altimagetext: "Art Icon",
-                },
-                {
-                    id:1010,
-                    subject: "Art",
-                    location: "Manchester",
-                    price: 30,
-                    space: 5,
-                    imagepath: "images/art.png",
-                    altimagetext: "Art Icon",
-                },
-            
-            
-            ],
+
+                lessons: [],
+                
                 cart: [],
                 username: "",
                 userphone: "",
@@ -106,6 +23,32 @@ const app = Vue.createApp({
                 
             }
         },
+
+
+
+        created() {
+            console.log("Backend api:", this.apibase);
+
+            fetch(this.apibase + "lessons")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok: " + response.status);
+                }
+                return response.json();
+            })
+            .then(json => {
+                console.log("Fetched lessons:", json);
+                this.lessons = json; // 👈 store lessons from the database
+            })
+            .catch(error => {
+                console.error("Failed to load lessons from backend:", error);
+                // Optional: you could set fallback hardcoded lessons here if you want
+            });
+
+        },
+
+
+
         methods: {
             addlesson(lesson) {//adds the lesson added by the user, pushes it onto their cart with quantity of 1 if the lesson isnt already added or quantity added to the current lesson in their cart
 
@@ -126,7 +69,7 @@ const app = Vue.createApp({
                 this.showlesson = !this.showlesson;
             },
 
-            removelesson(lesson) {//removes the lesson selected by the user from their cart, only 1 quantity removed and a space added back onto the database (to be added for backend)
+            removelesson(lesson) {//removes the lesson selected by the user from their cart, only 1 quantity removed and a space added back onto the database (to be added for backend) / doesnt have to be added to database as only after checkout is a push made
                 const existing = this.cart.find(item => item.id === lesson.id);//checks if selected lesson is in cart
 
                 if(existing) {//if lesson with same id as lesson selected is in the cart then it will decrease the quantity from cart 
@@ -140,7 +83,7 @@ const app = Vue.createApp({
                 }
             },
             checkout() {
-                //placeholder for function to push order onto database
+                //placeholder for function to push order onto database/ only thing to have database pushed onto into table of checkouts
                 alert("Order Confirmed " + this.username);
                 this.username = "";
                 this.userphone = "";
