@@ -92,7 +92,7 @@ const app = Vue.createApp({
                     total: this.pricetotal
                 };
 
-                fetch(this.api_base + "checkout", {
+                fetch(this.apibase + "checkout", {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                 })
