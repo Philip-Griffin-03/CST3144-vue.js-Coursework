@@ -39,11 +39,10 @@ const app = Vue.createApp({
             })
             .then(json => {
                 console.log("Fetched lessons:", json);
-                this.lessons = json; // 👈 store lessons from the database
+                this.lessons = json;
             })
             .catch(error => {
                 console.error("Failed to load lessons from backend:", error);
-                // Optional: you could set fallback hardcoded lessons here if you want
             });
 
         },
@@ -94,13 +93,20 @@ const app = Vue.createApp({
 
                 this.isCheckingOut = true;
                 console.log("checkout started");
-
-
+                
                 try {
+                    const orderCart = this.cart.map(item => ({
+                        id: item.id,
+                        subject: item.subject,
+                        location: item.location,
+                        price: item.price,
+                        quantity: item.quantity
+                    }));
+
                     const order = {
                         username: this.username,
                         userphone: this.userphone,
-                        cart: this.cart,
+                        cart: orderCart,
                         total: this.pricetotal
                     };
 

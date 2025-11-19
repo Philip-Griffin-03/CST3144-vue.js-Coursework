@@ -28,7 +28,11 @@
                 <input v-model="username" placeholder="Name:" class="username"/>
                 <input v-model="userphone" placeholder="Phone Number:" class="userphone"/>
                 <button v-if="infocheck" disabled>Check Out - Enter Info properly</button>
-                <button @click="checkout" v-else>Check Out</button>
+
+                <button type="button" v-else @click="checkout" :disabled="infocheck || cart.length===0 || isCheckingOut"
+                    >{{ isCheckingOut ? "Processing..." : "Check Out"}}
+                </button>
+
             </div>
 
             <div class="Sortfunction" v-else>
