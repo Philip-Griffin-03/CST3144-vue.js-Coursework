@@ -109,10 +109,6 @@
                                 <h2> Price: £{{lesson.price}} </h2>
                                 <h2> Spaces: {{lesson.quantity}} </h2> <!-- make this a counter that will add however many per same lesson-->
 
-                                <!-- change these buttons to a remove one
-                                <button class="addButton" @click="addlesson(lesson)" v-if="lesson.space > 0" >Add to cart</button>
-                                <button class="addButton" disabled v-else> Add to cart </button>-->
-
                                 <button class="addButton" @click="removelesson(lesson)">Remove</button>
 
                             </div>
