@@ -24,18 +24,18 @@
                 <input type="text" v-model="search" placeholder="Search for a lesson:" />
             </div>
             
-            <div class="CheckoutInfo" v-if="!showlesson">
+            <div class="CheckoutInfo" v-if="!showlesson"><!--v-if to checck if the user is on the store page or the checkout page-->
                 <input v-model="username" placeholder="Name:" class="username"/>
                 <input v-model="userphone" placeholder="Phone Number:" class="userphone"/>
                 <button v-if="infocheck" disabled>Check Out - Enter Info properly</button>
 
                 <button type="button" v-else @click="checkout" :disabled="infocheck || cart.length===0 || isCheckingOut"
-                    >{{ isCheckingOut ? "Processing..." : "Check Out"}}
+                    >{{ isCheckingOut ? "Processing..." : "Check Out"}}<!--this disables the button so it ccan't be clicked multiple times-->
                 </button>
 
             </div>
 
-            <div class="Sortfunction" v-else>
+            <div class="Sortfunction" v-else><!--creates model of the sort functions-->
                 <p>Sort By:</p>
 
                 <label><input type="radio" id="Subject" value="Subject" v-model="picked" />Subject</label>
@@ -56,11 +56,10 @@
 
 
         <div class="lesson">
-
             
             <button class="addcart" @click="showcheckout" v-if="cartitemcount == 0" disabled> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Cart {{cartitemcount}} </button>
             <button class="addcart" @click="showcheckout" v-else> <img src="images/checkout.png" style="width: 25px; height: 25px;"> Cart {{cartitemcount}} </button>
-
+            <!--handles the cart button allowing user to switch from store to checkout pgae-->
 
             <div v-if="showlesson" class="shop">
 
@@ -68,7 +67,7 @@
                 <div class="lesson-layout">
                     <div class="lesson-list" >
 
-                        <div class="subject" v-for="lesson in sort" :key="lesson.id">
+                        <div class="subject" v-for="lesson in sort" :key="lesson.id"><!--v-for to go through all lessons and display them within a grid pattern along with a button and their information for each one-->
 
                             <div class="info">
                                 <h2> Subject: {{lesson.subject}}  </h2>
