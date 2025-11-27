@@ -1,6 +1,6 @@
 
 
-const api_base = "http://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com/";
+const api_base = "http://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com";
 
 
 const app = Vue.createApp({
@@ -30,7 +30,7 @@ const app = Vue.createApp({
         created() {
             console.log("Backend api:", this.apibase);
 
-            fetch(this.apibase + "lessons")
+            fetch(this.apibase + "/lessons")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok: " + response.status);
@@ -110,7 +110,7 @@ const app = Vue.createApp({
                         total: this.pricetotal
                     };
 
-                    const orderRes = await fetch(this.apibase + "checkout", {
+                    const orderRes = await fetch(this.apibase + "/checkout", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(order)
@@ -124,7 +124,7 @@ const app = Vue.createApp({
                     console.log("Order Saved:", data);
 
                     const updatePromises = this.cart.map(item => {
-                        return fetch(this.apibase + "lessons/" + item.id, {
+                        return fetch(this.apibase + "/lessons/" + item.id, {
                             method: "PUT",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ quantity: item.quantity })
