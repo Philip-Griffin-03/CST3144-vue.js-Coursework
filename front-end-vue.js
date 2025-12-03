@@ -1,6 +1,6 @@
 
 
-const api_base = "https://schoolstoresite-env.eba-gd5cp4rr.eu-north-1.elasticbeanstalk.com";
+const api_base = "https://schoolstoresite.onrender.com/";
 
 
 const app = Vue.createApp({
@@ -30,7 +30,7 @@ const app = Vue.createApp({
         created() {
             console.log("Backend api:", this.apibase);
 
-            fetch(this.apibase + "/lessons")
+            fetch(this.apibase + "lessons")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok: " + response.status);
@@ -39,10 +39,11 @@ const app = Vue.createApp({
             })
             .then(json => {
                 console.log("Fetched lessons:", json);
-                this.lessons = json;
+                this.lessons = json; // 👈 store lessons from the database
             })
             .catch(error => {
                 console.error("Failed to load lessons from backend:", error);
+                // Optional: you could set fallback hardcoded lessons here if you want
             });
 
         },
@@ -93,24 +94,17 @@ const app = Vue.createApp({
 
                 this.isCheckingOut = true;
                 console.log("checkout started");
-                
-                try {
-                    const orderCart = this.cart.map(item => ({
-                        id: item.id,
-                        subject: item.subject,
-                        location: item.location,
-                        price: item.price,
-                        quantity: item.quantity
-                    }));
 
+
+                try {
                     const order = {
                         username: this.username,
                         userphone: this.userphone,
-                        cart: orderCart,
+                        cart: this.cart,
                         total: this.pricetotal
                     };
 
-                    const orderRes = await fetch(this.apibase + "/checkout", {
+                    const orderRes = await fetch(this.apibase + "checkout", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(order)
@@ -124,7 +118,7 @@ const app = Vue.createApp({
                     console.log("Order Saved:", data);
 
                     const updatePromises = this.cart.map(item => {
-                        return fetch(this.apibase + "/lessons/" + item.id, {
+                        return fetch(this.apibase + "lessons/" + item.id, {
                             method: "PUT",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ quantity: item.quantity })
